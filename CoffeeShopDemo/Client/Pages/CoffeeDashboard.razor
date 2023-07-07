@@ -1,0 +1,27 @@
+﻿@page "/coffeedashboard"
+
+<h2>Coffee Dashboard</h2>
+
+<div class="row @(coffeeOrderStatusMessageCollapsed ? "collapse": "" )">
+    <div class="col-sm-12 alert @(coffeeOrderStatusAlertClass)" role="alert">
+        @coffeeOrder.Message
+    </div>
+</div>
+
+<br />
+
+@foreach (var coffee in coffeeOrder.Coffees)
+{
+    <div class="row">
+        <div class="col-sm-12 alert @coffee.AlertClass" role="alert">
+            @coffee.Message
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (var step in coffee.CoffeeProcessSteps)
+        {
+            <CoffeeProcessCard CoffeeProcessStep="@step"></CoffeeProcessCard>
+        }
+    </div>
+}
